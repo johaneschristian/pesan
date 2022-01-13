@@ -10,22 +10,22 @@ from django.contrib.auth.models import User
 import datetime
 
 def login_page(request):
-    if request.user.is_authenticated:
-        return redirect('message:chat_window')
+    # if request.user.is_authenticated:
+    #     return redirect('message:chat_window')
 
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+    # if request.method == 'POST':
+    #     email = request.POST.get('email')
+    #     password = request.POST.get('password')
 
-        # Get corresponding username from email
-        corresponding_users = User.objects.filter(email=email)
+    #     # Get corresponding username from email
+    #     corresponding_users = User.objects.filter(email=email)
 
-        if corresponding_users:
-            user = authenticate(username=corresponding_users[0].username, password=password)
-            # if user:
-            #     login(request, user)
-            #     print(user.id)
-            #     return redirect('message:chat_window')
+    #     if corresponding_users:
+    #         user = authenticate(username=corresponding_users[0].username, password=password)
+    #         # if user:
+    #         #     login(request, user)
+    #         #     print(user.id)
+    #         #     return redirect('message:chat_window')
 
     return render(request, 'message/landing_page.html')
 
