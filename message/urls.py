@@ -6,7 +6,6 @@ app_name = 'message'
 
 urlpatterns = [
     path('', views.login_page, name='login_page'),
-    path('fix', views.fix_cursor),
     # path('logout/', views.logout_mechanism, name='logout'),
     # path('register/', views.register_user, name='register_user'),
     # path('chat/', views.chat_window, name='chat_window'),

@@ -1,4 +1,4 @@
-# from django.http.response import HttpResponse, JsonResponse
+from django.http.response import HttpResponse, JsonResponse
 from http.client import HTTPResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
@@ -10,11 +10,6 @@ from django.db import connection
 # from django.views.decorators.csrf import csrf_exempt
 
 import datetime
-
-def fix_cursor(request):
-    cursor = connection.cursor()
-    cursor.execute("SET search_path to PUBLIC")
-    return redirect('message:login_page')
 
 def login_page(request):
     # if request.user.is_authenticated:
@@ -34,7 +29,7 @@ def login_page(request):
     #         #     print(user.id)
     #         #     return redirect('message:chat_window')
 
-    return HTTPResponse('Hello World')
+    return HttpResponse('hello world~~')
 
 # @login_required
 # def logout_mechanism(request):
