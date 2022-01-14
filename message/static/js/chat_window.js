@@ -75,7 +75,7 @@ function update_chat(pushdown=false) {
                 }
             }
 
-            message_timeout = setTimeout(update_chat, 500);
+            message_timeout = setTimeout(update_chat, 100);
 
             if(scroll_down || pushdown) {
                 chat_ctr.scrollTop = chat_ctr.scrollHeight;
