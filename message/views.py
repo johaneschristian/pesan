@@ -35,7 +35,7 @@ def login_page(request):
 def logout_mechanism(request):
     logout(request)
 
-    return redirect('message:home')
+    return redirect('message:login_page')
 
 def register_user(request):
     if request.method == 'POST':
@@ -145,6 +145,21 @@ def add_messages(request):
     
         return JsonResponse({'successful':True}, safe=False)
 
+@login_required
+def add_friend(request):
+    if request.method == 'GET':
+        username = request.GET.get('username')
+        try: 
+            found_user = User.objects.get(username=username).friendholder
+
+            request.user.friendholder.friends.add(found_user)
+
+            return JsonResponse({'isSuccssful':True}, safe=False)
+
+        
+        except Exception as e:
+            print(e)
+            return JsonResponse({'isSuccessful':False}, safe=False)
 
         
 
