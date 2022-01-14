@@ -13,7 +13,7 @@ import datetime
 
 def login_page(request):
     if request.user.is_authenticated:
-        return redirect('message:chat_window')
+        return HttpResponse('Already logged in')
 
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -22,12 +22,14 @@ def login_page(request):
         # Get corresponding username from email
         corresponding_users = User.objects.filter(email=email)
 
+
+
         if corresponding_users:
             user = authenticate(username=corresponding_users[0].username, password=password)
             if user:
                 login(request, user)
                 print(user.id)
-                return redirect('message:chat_window')
+                return HttpResponse('Successful login')
 
     return render(request, 'hello.html')
 
