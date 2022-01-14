@@ -37,6 +37,10 @@ function update_chat(pushdown=false) {
         clearTimeout(message_timeout);
     }
 
+    if(pushdown) {
+        chat_container.innerHTML = "";
+    }
+
     $.ajax({
         type: 'GET',
         url: '/get-messages/?corresponding-id='+chatter_account_id,

@@ -46,7 +46,7 @@ function fillUsers(users, filter=null) {
             profile_card.className = "profile-card";
             profile_card.onclick = function() {
                 setActiveUserID(users[i]["user_id"]);
-                update_chat();
+                update_chat(pushdown=true);
                 $(".user-profile-name")[0].innerText = users[i]["profile_name"];
                 toggleModal();
 

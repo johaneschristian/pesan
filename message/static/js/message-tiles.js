@@ -30,6 +30,8 @@ function fillTiles(latest_chats, filter=null) {
             message_tile.className = "message-tile";
             message_tile.onclick = function() {
                                         setActiveUserID(latest_chats[i]["fields"]["corresponding_account_id"]);
+                                        console.log(latest_chats[i]["fields"]["corresponding_account_id"]);
+                                        
                                         update_chat(pushdown=true);
                                         $(".user-profile-name")[0].innerText = latest_chats[i]["fields"]["corresponding_account_name"];
 
