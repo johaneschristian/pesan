@@ -42,7 +42,7 @@ class Message(models.Model):
 
 class FriendHolder(models.Model):
     owning_user = models.OneToOneField(User, primary_key=True,on_delete=models.CASCADE)
-    friends = models.ManyToManyField('self', symmetrical=True)
+    friends = models.ManyToManyField('self', symmetrical=True, null=True)
 
 class LastMessage(models.Model):
     pivot_account = models.ForeignKey(User, on_delete=models.CASCADE, related_name="pivot_messages")
