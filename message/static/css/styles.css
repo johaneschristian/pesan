@@ -86,7 +86,7 @@ a {
 
     /*Font Styling*/
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -112,6 +112,7 @@ a {
     width: fit-content;
     padding: 10px;
     margin-bottom: 10px;
+    font-size: 0.8rem;
 
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -135,6 +136,7 @@ a {
     width: fit-content;
     padding: 10px;
     margin-bottom: 10px;
+    font-size: 0.8rem;
 
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -198,7 +200,7 @@ a {
 }
 
 .tile-last-message {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: grey
 }
 
@@ -323,7 +325,7 @@ a {
     align-items: center;
 }
 
-#contact-search-bar {
+.overlay-search-bar {
     width: 100%;
     padding: 10px;
 
@@ -354,4 +356,29 @@ a {
 
 .on-start {
     visibility: hidden;
+}
+
+.user-container {
+    background-color: white;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#username-search-name {
+    font-size: 1rem;
+    color: black;
+
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+}
+
+#username-search-id {
+    font-size: 0.6rem;
+    color: grey;
+    margin-bottom: 0.6rem;
 }

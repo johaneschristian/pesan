@@ -14,4 +14,5 @@ urlpatterns = [
     path('get-messages/', views.get_messages, name='get_messages'),
     path('add-message/', views.add_messages, name='add_message'),
     path('add-friend/', views.add_friend, name='add_friend'),
+    path('find/', views.return_matching_user),
 ]

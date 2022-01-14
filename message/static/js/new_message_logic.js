@@ -26,9 +26,7 @@ function fetchUsers() {
             cached_users = data;
             fillUsers(cached_users);
         }
-    });
-
-    
+    }); 
 }
 
 $("#contact-search-bar").on('input', function() {

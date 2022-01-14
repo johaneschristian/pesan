@@ -146,10 +146,11 @@ def add_messages(request):
     
         return JsonResponse({'successful':True}, safe=False)
 
+@csrf_exempt
 @login_required
 def add_friend(request):
-    if request.method == 'GET':
-        username = request.GET.get('username')
+    if request.method == 'POST':
+        username = request.POST.get('username')
         try: 
             found_user = User.objects.get(username=username).friendholder
 
@@ -159,9 +160,25 @@ def add_friend(request):
 
         
         except Exception as e:
-            print(e)
+            
             return JsonResponse({'isSuccessful':False}, safe=False)
 
+
+def return_matching_user(request):
+    if request.method == 'GET':
+        username = request.GET.get('username')
+
+        matchings = User.objects.filter(username=username).exclude(id=request.user.id)
+
+        if matchings:
+            data = {
+                'full_name': matchings[0].first_name,
+                'username': matchings[0].username,
+                'is_friend': matchings[0].friendholder in request.user.friendholder.friends.all(),
+            }
+        else:
+            data = {}
+
+        return JsonResponse(data, safe=False)
         
 
-    

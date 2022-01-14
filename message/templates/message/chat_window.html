@@ -13,6 +13,7 @@
     <script src="{% static 'js/message-tiles.js' %}" defer></script>
     <script src="{% static 'js/new_message_logic.js' %}" defer></script>
     <script src="{% static 'js/active_variables.js' %}" defer></script>
+    <script src="{% static 'js/add_friend.js' %}" defer></script>
     <title>ChatApp</title>
 </head>
 <body>
@@ -51,15 +52,37 @@
     </div>
 
     <!-- New Message Display -->
-    <div id="modal-holder" class="overlay hidden">
+    <div id="modal-holder" class="overlay">
         <div class="overlay-title">
-          Your Contacts
+            <div>
+                Your Contacts
+                <button id="search-new-btn">Search New</button>
+            </div>
+          
           <input id="close-new-message" type="button" value="&#x2715" style="background: none; color: white; border: none;">
         </div>
         <div class="overlay-search-container">
-            <input type="text" id="contact-search-bar" placeholder="Search by Profile Name">
+            <input type="text" class="overlay-search-bar" id="contact-search-bar" placeholder="Search by Profile Name">
         </div>
         <div class="overlay-container" id="overlay-container"></div>
+    </div>
+
+    <!-- Search for user modal -->
+    <div id="modal-username-search-holder" class="overlay hidden">
+        <div class="overlay-title">
+            Search User by Username
+            <input id="cancel-search-username" type="button" value="Cancel" style="background: none; color: turquoise; border: none;">
+        </div>
+        <div class="overlay-search-container">
+            <input type="text" class="overlay-search-bar" id="username-search-bar" placeholder="Search by Username">
+        </div>
+        <div class="overlay-container">
+            <div class="user-container">
+                <span id="username-search-name"></span>
+                <span id="username-search-id"></span>
+                <button class="btn btn-success" id="add-friend-button">Add</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>
