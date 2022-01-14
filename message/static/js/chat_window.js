@@ -37,7 +37,7 @@ function update_chat(pushdown=false) {
         url: '/get-messages/?corresponding-id='+chatter_account_id,
         success: (data) => {
             messages = data;
-            chat_container.innerText = "";
+            var holder = document.createElement('div');
 
             for(let i=0; i < messages.length; i++) {
                 var iterated_message = messages[i]["fields"]
@@ -71,8 +71,10 @@ function update_chat(pushdown=false) {
             
                     message_row.appendChild(message)
             
-                    chat_container.appendChild(message_row)
+                    holder.appendChild(message_row)
                 }
+
+                chat_container.innerHTML = holder.innerHTML;
             }
 
             message_timeout = setTimeout(update_chat, 100);
