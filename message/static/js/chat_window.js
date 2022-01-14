@@ -77,7 +77,7 @@ function update_chat(pushdown=false) {
                 chat_container.innerHTML = holder.innerHTML;
             }
 
-            message_timeout = setTimeout(update_chat, 100);
+            message_timeout = setTimeout(update_chat, 200);
 
             if(scroll_down || pushdown) {
                 chat_ctr.scrollTop = chat_ctr.scrollHeight;
@@ -112,6 +112,8 @@ function add_message(new_message, corresponding_account_id) {
     chat_container.appendChild(message_row);
 
     chat_ctr.scrollTop = chat_ctr.scrollHeight;
+    
+    scroll_down = true;
 
     $.ajax({
         type:'post',
