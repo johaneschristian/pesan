@@ -49,6 +49,12 @@ function fillUsers(users, filter=null) {
                 update_chat();
                 $(".user-profile-name")[0].innerText = users[i]["profile_name"];
                 toggleModal();
+
+                if($("#user-info-container").hasClass("on-start")) {
+                    $("#user-info-container").removeClass("on-start");
+                    $("#chat-container").removeClass("on-start");
+                    $("#sent-container").removeClass("on-start");
+                }
                 
             };
 

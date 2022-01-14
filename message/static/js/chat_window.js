@@ -75,7 +75,7 @@ function update_chat(pushdown=false) {
                 }
             }
 
-            message_timeout = setTimeout(update_chat, 100);
+            message_timeout = setTimeout(update_chat, 500);
 
             if(scroll_down || pushdown) {
                 chat_ctr.scrollTop = chat_ctr.scrollHeight;
@@ -86,6 +86,31 @@ function update_chat(pushdown=false) {
 }
 
 function add_message(new_message, corresponding_account_id) {
+    message_row = document.createElement('div');
+    message_row.className = "message-row outgoing";
+
+    message = document.createElement('div');
+    message.className = "message-outgoing";
+    
+
+    message_body = document.createElement('div');
+    message_body.className = "message-body";
+    message_body.innerText = new_message;
+
+
+    message_timestamp = document.createElement('div');
+    message_timestamp.className = "message-timestamp";
+    message_timestamp.innerText = '🕐';
+
+    message.appendChild(message_body);
+    message.appendChild(message_timestamp);
+
+    message_row.appendChild(message);
+
+    chat_container.appendChild(message_row);
+
+    chat_ctr.scrollTop = chat_ctr.scrollHeight;
+
     $.ajax({
         type:'post',
         url:'/add-message/',

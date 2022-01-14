@@ -33,9 +33,10 @@ function fillTiles(latest_chats, filter=null) {
                                         update_chat(pushdown=true);
                                         $(".user-profile-name")[0].innerText = latest_chats[i]["fields"]["corresponding_account_name"];
 
-                                        if($("#to-sent-input").hasClass("opacity-0")) {
-                                            $("#to-sent-input").removeClass("opacity-0");
-                                            $("#send-btn").removeClass("opacity-0");
+                                        if($("#user-info-container").hasClass("on-start")) {
+                                            $("#user-info-container").removeClass("on-start");
+                                            $("#chat-container").removeClass("on-start");
+                                            $("#sent-container").removeClass("on-start");
                                         }
                                         
                                     }
