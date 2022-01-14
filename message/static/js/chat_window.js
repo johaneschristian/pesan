@@ -24,6 +24,8 @@ const chat_container = $(".chat-container")[0]
 
 var message_timeout;
 
+var previous_length;
+
 function update_chat(pushdown=false) {
     user_account_id = user_account_id_stored;
     chatter_account_id = active_user_id_stored;
@@ -77,12 +79,13 @@ function update_chat(pushdown=false) {
                 chat_container.innerHTML = holder.innerHTML;
             }
 
-            message_timeout = setTimeout(update_chat, 1000);
-
-            if(scroll_down || pushdown) {
+            message_timeout = setTimeout(update_chat, 800);
+            
+            if(scroll_down || pushdown || previous_length < messages.length) {
                 chat_ctr.scrollTop = chat_ctr.scrollHeight;
                 scroll_down = false;
             }
+            previous_length = messages.length;
         },
     });
 }
@@ -118,13 +121,11 @@ function add_message(new_message, corresponding_account_id) {
     $.ajax({
         type:'post',
         url:'/add-message/',
-        async: false,
         data: {
             'corresponding-id':corresponding_account_id,
             'content':new_message,
         },
         success: function(data) {
-            console.log('Successful');
             scroll_down = true;
         }   
     }); 
