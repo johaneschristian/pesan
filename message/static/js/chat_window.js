@@ -1,6 +1,7 @@
 window.addEventListener('load', update_chat);
 
 var scroll_down = false;
+var should_update = true;
 
 const to_send_input = document.getElementById('to-sent-input');
 const chat_ctr = document.getElementById("chat-container");
@@ -38,9 +39,11 @@ function update_chat(pushdown=false) {
         type: 'GET',
         url: '/get-messages/?corresponding-id='+chatter_account_id,
         success: (data) => {
+            message_timeout = setTimeout(update_chat, 800);
             messages = data;
             var holder = document.createElement('div');
 
+            if(should_update)
             for(let i=0; i < messages.length; i++) {
                 var iterated_message = messages[i]["fields"]
 
@@ -77,9 +80,7 @@ function update_chat(pushdown=false) {
                 }
 
                 chat_container.innerHTML = holder.innerHTML;
-            }
-
-            message_timeout = setTimeout(update_chat, 800);
+            }       
             
             if(scroll_down || pushdown || previous_length < messages.length) {
                 chat_ctr.scrollTop = chat_ctr.scrollHeight;
@@ -91,6 +92,8 @@ function update_chat(pushdown=false) {
 }
 
 function add_message(new_message, corresponding_account_id) {
+    should_update = false;
+
     message_row = document.createElement('div');
     message_row.className = "message-row outgoing";
 
@@ -126,6 +129,7 @@ function add_message(new_message, corresponding_account_id) {
             'content':new_message,
         },
         success: function(data) {
+            should_update = true;
             scroll_down = true;
         }   
     }); 
