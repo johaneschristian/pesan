@@ -28,7 +28,7 @@ def login_page(request):
     #         #     login(request, user)
     #         #     print(user.id)
     #         #     return redirect('message:chat_window')
-    return render(request, 'landing_page.html')
+    return render(request, 'hello.html')
 
 # @login_required
 # def logout_mechanism(request):
