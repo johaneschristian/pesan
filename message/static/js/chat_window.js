@@ -1,7 +1,6 @@
 window.addEventListener('load', update_chat);
 
 var scroll_down = false;
-var should_update = true;
 
 const to_send_input = document.getElementById('to-sent-input');
 const chat_ctr = document.getElementById("chat-container");
@@ -25,11 +24,14 @@ const chat_container = $(".chat-container")[0]
 
 var message_timeout;
 
-var previous_length;
+var previous_length = 0;
+var previous_sent_messages_length = 0;
 
 function update_chat(pushdown=false) {
     user_account_id = user_account_id_stored;
     chatter_account_id = active_user_id_stored;
+
+    var sent_messages_length = 0;
 
     if(message_timeout != undefined) {
         clearTimeout(message_timeout);
@@ -43,7 +45,6 @@ function update_chat(pushdown=false) {
             messages = data;
             var holder = document.createElement('div');
 
-            if(should_update)
             for(let i=0; i < messages.length; i++) {
                 var iterated_message = messages[i]["fields"]
 
@@ -54,6 +55,9 @@ function update_chat(pushdown=false) {
             
                         message = document.createElement('div');
                         message.className = "message-outgoing";
+
+                        sent_messages_length++;
+
                     } else {
                         message_row = document.createElement('div');
                         message_row.className = "message-row incoming";
@@ -79,7 +83,10 @@ function update_chat(pushdown=false) {
                     holder.appendChild(message_row)
                 }
 
-                chat_container.innerHTML = holder.innerHTML;
+                if(previous_sent_messages_length <= sent_messages_length) {
+                    chat_container.innerHTML = holder.innerHTML;
+                    previous_sent_messages_length = sent_messages_length;
+                } 
             }       
             
             if(scroll_down || pushdown || previous_length < messages.length) {
@@ -92,7 +99,7 @@ function update_chat(pushdown=false) {
 }
 
 function add_message(new_message, corresponding_account_id) {
-    should_update = false;
+    previous_sent_messages_length++;
 
     message_row = document.createElement('div');
     message_row.className = "message-row outgoing";
@@ -129,7 +136,6 @@ function add_message(new_message, corresponding_account_id) {
             'content':new_message,
         },
         success: function(data) {
-            should_update = true;
             scroll_down = true;
         }   
     }); 

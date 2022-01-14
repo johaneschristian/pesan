@@ -38,6 +38,9 @@ function fillTiles(latest_chats, filter=null) {
                                             $("#chat-container").removeClass("on-start");
                                             $("#sent-container").removeClass("on-start");
                                         }
+
+                                        previous_sent_messages_length = 0;
+                                        previous_length = 0;
                                         
                                     }
 

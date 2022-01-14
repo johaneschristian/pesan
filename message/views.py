@@ -1,3 +1,4 @@
+import time
 from django.http.response import HttpResponse, JsonResponse
 from http.client import HTTPResponse
 from django.shortcuts import redirect, render
