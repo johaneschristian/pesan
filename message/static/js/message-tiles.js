@@ -28,9 +28,14 @@ function fillTiles(latest_chats, filter=null) {
         if(filter == null || (filter!=null && latest_chats[i]["fields"]["corresponding_account_name"].indexOf(filter) > -1)) {
             message_tile = document.createElement('button');
             message_tile.className = "message-tile";
+            message_tile.id = "tile" + i;
+
+            if(latest_chats[i]["fields"]["corresponding_account_id"] == active_user_id_stored) {
+                message_tile.className += " selected-tile";
+            }
+
             message_tile.onclick = function() {
                                         setActiveUserID(latest_chats[i]["fields"]["corresponding_account_id"]);
-                                        console.log(latest_chats[i]["fields"]["corresponding_account_id"]);
                                         
                                         update_chat(pushdown=true);
                                         $(".user-profile-name")[0].innerText = latest_chats[i]["fields"]["corresponding_account_name"];
@@ -40,6 +45,10 @@ function fillTiles(latest_chats, filter=null) {
                                             $("#chat-container").removeClass("on-start");
                                             $("#sent-container").removeClass("on-start");
                                         }
+
+                                        $(".message-tile").removeClass("selected-tile");
+
+                                        $("#tile" + i).addClass("selected-tile");
 
                                         previous_sent_messages_length = 0;
                                         previous_length = 0;

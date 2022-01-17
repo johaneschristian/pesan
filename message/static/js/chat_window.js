@@ -38,7 +38,13 @@ function update_chat(pushdown=false) {
     }
 
     if(pushdown) {
+        /* Clear chat from other accounts from display */
         chat_container.innerHTML = "";
+
+        if(history_dictio[chatter_account_id]) {
+            chat_container.innerHTML = history_dictio[chatter_account_id];
+            chat_ctr.scrollTop = chat_ctr.scrollHeight;
+        }
     }
 
     $.ajax({
@@ -50,7 +56,7 @@ function update_chat(pushdown=false) {
             var holder = document.createElement('div');
 
             for(let i=0; i < messages.length; i++) {
-                var iterated_message = messages[i]["fields"]
+                var iterated_message = messages[i]["fields"];
 
                 if(iterated_message["receiver"] == chatter_account_id || iterated_message["sender"] == chatter_account_id) {
                     if(iterated_message["sender"] == user_account_id) {
@@ -97,7 +103,9 @@ function update_chat(pushdown=false) {
                 chat_ctr.scrollTop = chat_ctr.scrollHeight;
                 scroll_down = false;
             }
+
             previous_length = messages.length;
+            history_dictio[chatter_account_id] = holder.innerHTML;
         },
     });
 }
